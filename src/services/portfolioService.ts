@@ -1,3 +1,4 @@
+import type { ProjectsParams } from './../Types/ParamsTypes';
 import type {
   EducationType,
   ExperiencesType,
@@ -38,7 +39,7 @@ export const portfolioService = {
     return axiosGet<ApiResponseType<SkillsType[]>>("skills", params);
   },
 
-  async getProjects(params?: GeneralParams) {
+  async getProjects(params?: ProjectsParams) {
     return axiosGet<ApiResponseType<ProjectType[]>>("projects", params);
   },
 
@@ -49,5 +50,9 @@ export const portfolioService = {
   async getSocialNetwork(name: string) {
     const params = { name: name };
     return await axiosGet<SocialNetworkRefType>(`social-medias/by-name`, params);
+  },
+
+  async getAllSocialNetwork(params?: GeneralParams) {
+    return await axiosGet<ApiResponseType<SocialNetworkRefType[]>>(`social-medias`, params);
   },
 };

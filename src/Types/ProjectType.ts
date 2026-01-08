@@ -11,4 +11,5 @@ export type ProjectType = {
   techStack: string[];
   hidden: boolean;
   finishDate: string;
+  highlight: boolean
 };

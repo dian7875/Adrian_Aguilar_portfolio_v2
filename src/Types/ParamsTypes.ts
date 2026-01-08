@@ -7,3 +7,6 @@ export interface GeneralParams {
 export interface SkillParams extends GeneralParams {
   category?: string;
 }
+export interface ProjectsParams extends GeneralParams {
+  highlight?: boolean
+}
