@@ -1,7 +1,7 @@
 <template>
   <header
-    v-show="showHeader"
-    class="flex items-center justify-between w-full px-10 py-5"
+    class="z-50 flex items-center justify-between w-full px-10 py-5"
+    :class="{ 'hidden-header': !showHeader }"
   >
     <span class="font-mono text-sm text-neutral-200">
       &lt; {{ userName }} /&gt;
@@ -10,7 +10,7 @@
 
     <nav class="flex items-center gap-8">
       <ol
-        class="flex gap-8 text-sm font-normal list-decimal text-neutral-300 marker:text-blue-400"
+        class="max-sm:hidden flex gap-8 text-sm font-normal list-decimal text-neutral-300 marker:text-blue-400"
       >
         <li>
           <a
@@ -46,49 +46,59 @@
         </li>
       </ol>
 
-      <div class="relative inline-block">
-        <div
-          ref="trail"
-          class="absolute inset-0 rounded-lg bg-blue-400/20 pointer-events-none"
-        />
-
-        <button
-          v-if="cvUrl"
-          ref="btn"
-          class="relative cursor-pointer rounded-lg border px-4 py-2 text-sm font-medium bg-neutral-900 border-neutral-700 text-neutral-200 hover:border-blue-400 hover:text-blue-400 transition-all duration-200 hover:scale-[1.02]"
-        >
-          <a :href="cvUrl" target="_blank" rel="noopener noreferrer">
-            Ver CV
-          </a>
-        </button>
-      </div>
+      <CvButton />
     </nav>
   </header>
 </template>
 
 <script setup lang="ts">
 defineProps<{
-  cvUrl?: string;
   userName?: string;
 }>();
 
-import { onMounted, onUnmounted, ref } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
+import CvButton from "../ui/CvButton.vue";
 
 const showHeader = ref(true);
 let lastScroll = 0;
+const delta = 10;
 
 const onScroll = () => {
   const current = window.scrollY;
 
-  if (current < lastScroll) {
+  if (current <= 50) {
     showHeader.value = true;
-  } else {
+    lastScroll = current;
+    return;
+  }
+
+  const diff = current - lastScroll;
+
+  if (Math.abs(diff) <= delta) return;
+
+  if (diff > 0) {
     showHeader.value = false;
+  } else if (diff < 0) {
+    showHeader.value = true;
   }
 
   lastScroll = current;
 };
 
-onMounted(() => window.addEventListener("scroll", onScroll));
+onMounted(() => window.addEventListener("scroll", onScroll, { passive: true }));
 onUnmounted(() => window.removeEventListener("scroll", onScroll));
 </script>
+
+<style>
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 50;
+  transition: transform 0.3s ease;
+}
+
+.hidden-header {
+  transform: translateY(-100%);
+}
+</style>
