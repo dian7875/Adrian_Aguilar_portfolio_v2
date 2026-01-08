@@ -1,4 +1,5 @@
 <template>
+  <Loader ref="loader" />
   <div class="min-h-screen flex flex-col relative">
     <Header :user-name="basicInfo?.name" />
     <LeftAside class="max-sm:hidden" />
@@ -6,9 +7,9 @@
 
     <main class="flex-1 flex flex-col items-center w-full">
       <Hero />
-      <About/>
-      <Experiences/>
-      <Projects/>
+      <About />
+      <Experiences />
+      <Projects />
       <Contacts />
     </main>
     <Footer />
@@ -25,6 +26,23 @@ import Experiences from "../sections/Experiences.vue";
 import Projects from "../sections/Projects.vue";
 import Contacts from "../sections/Contacts.vue";
 import { useBasicInfo } from "../../composables/useBasicInfo";
+import Loader from "../ui/Loader.vue";
+import { ref, watch } from "vue";
 
-const { basicInfo } = useBasicInfo();
+const { basicInfo, isPending } = useBasicInfo();
+
+const loader = ref<InstanceType<typeof Loader> | null>(null);
+
+let hideTimeout: number | null = null;
+
+watch(isPending, (pending) => {
+  if (!pending) {
+    hideTimeout = window.setTimeout(() => {
+      loader.value?.hide();
+    }, 1500);
+  } else if (hideTimeout) {
+    clearTimeout(hideTimeout);
+    hideTimeout = null;
+  }
+});
 </script>

@@ -1,6 +1,6 @@
 <template>
   <header
-    class="z-50 flex items-center justify-between w-full px-10 py-5"
+    class="z-50 flex items-center justify-between w-full px-10 py-5 bg-[#0a0a0a]"
     :class="{ 'hidden-header': !showHeader }"
   >
     <span class="font-mono text-sm text-neutral-200">
