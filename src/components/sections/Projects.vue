@@ -1,5 +1,7 @@
 <template>
-  <section class="min-h-screen w-4/6 p-2 text-white gap-10 max-md:w-full">
+  <section 
+  id="proyectos"
+  class="min-h-screen w-4/6 p-2 text-white gap-10 max-md:w-full">
     <BaseTitle title="03.Experiencia en proyectos" />
     <p class="text-neutral-400 text-sm mt-2">
       Algunos proyectos en los que he participado.

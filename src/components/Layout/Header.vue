@@ -30,10 +30,10 @@
         </li>
         <li>
           <a
-            href="#trabajos"
+            href="#proyectos"
             class="hover:text-blue-400 transition-colors duration-150"
           >
-            Trabajos
+            Proyectos
           </a>
         </li>
         <li>

@@ -1,5 +1,6 @@
 <template>
   <section
+  id="sobre-mi"
     class="min-h-screen w-full justify-center px-10 py-20 text-white flex flex-col md:flex-row items-center gap-10"
   >
     <img
