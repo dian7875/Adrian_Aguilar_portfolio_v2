@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@formkit/tempo": "^1.0.0",
     "@tailwindcss/vite": "^4.1.17",
     "@tanstack/vue-query": "^5.92.5",
     "animejs": "^4.2.2",
