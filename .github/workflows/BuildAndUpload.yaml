@@ -34,3 +34,4 @@ jobs:
           tags: ${{ secrets.DH_USER }}/portfoliov2:latest
           build-args: |
             VITE_API_BASE_URL=${{ secrets.URL }}
+            VITE_PORTFOLIO_OWNER_ID=${{ secrets.OUUID }}
